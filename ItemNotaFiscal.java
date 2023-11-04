@@ -6,8 +6,7 @@ public class ItemNotaFiscal {
     private int quantidade;
     private double valorUnitario;
     public ItemNotaFiscal proximo;
-    public ItemNotaFiscal(String itemNumero, String descricao,
-                          int quantidade, double valorUnitario) {
+    public ItemNotaFiscal(String itemNumero, String descricao, int quantidade, double valorUnitario) {
         this.itemNumero = itemNumero;
         this.descricao = descricao;
         this.quantidade = quantidade;
@@ -33,6 +32,10 @@ public class ItemNotaFiscal {
         return valorUnitario;
     }
 
+    public void setProximo(ItemNotaFiscal proximo) {
+        this.proximo = proximo;
+    }
+
     @Override
     public String toString() {
         return "ItemNotaFiscal{" +
@@ -43,4 +46,5 @@ public class ItemNotaFiscal {
                 ", proximo=" + proximo +
                 '}';
     }
+
 }

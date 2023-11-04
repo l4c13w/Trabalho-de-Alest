@@ -11,7 +11,7 @@ public class ListaItemNotaFiscal {
             fim = item;
         }
         else {
-            fim.proximo = item;
+            fim.setProximo(item);
             fim = item;
         }
         quantidade++;
@@ -28,5 +28,9 @@ public class ListaItemNotaFiscal {
     }
     public int getQuantidade() {
         return quantidade;
+    }
+
+    public String imprimirLista() {
+        return toString();
     }
 }

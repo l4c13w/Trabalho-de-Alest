@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class AppTeste {
     private BufferedReader br;
     private ListaItemNotaFiscal itens;
+    private ListaNotaFiscal listaNotas;
     public AppTeste(){
             try {
                 Path path = Paths.get("notas_fiscais_00500.csv");
@@ -25,7 +26,7 @@ public class AppTeste {
     public void executa() {
         try {
             lerArquivo();
-            ListaItemNotaFiscal lista;
+            System.out.println(listaNotas.imprimirLista());
 
         }catch(IOException e){
             System.out.println("Erro de E/S");
@@ -38,57 +39,25 @@ public class AppTeste {
         String[] colunas = linha.split("[|]");
         String notaAtual = colunas[0];
         String notaAnterior = notaAtual;
-        NotaFiscal nf;
+        listaNotas = new ListaNotaFiscal();
+        itens = new ListaItemNotaFiscal();
+        NotaFiscal nf = new NotaFiscal(colunas[0], Date.valueOf(colunas[1]), colunas[2], colunas[3], colunas[4], colunas[5], colunas[6]);
         while (linha != null) {
             colunas = linha.split("[|]");
-            if(notaAnterior.equals(notaAtual)) {
-                nf = new NotaFiscal(colunas[0], Date.valueOf(colunas[1]), colunas[2], colunas[3], colunas[4], colunas[5], colunas[6]);
-                itens = new ListaItemNotaFiscal();
-                ItemNotaFiscal item = new ItemNotaFiscal(colunas[7], colunas[8], Integer.parseInt(colunas[9]), Double.parseDouble(colunas[10]));
-                itens.adicionar(item);
+            notaAtual = colunas[0];
+            if(!notaAnterior.equals(notaAtual)) {
                 nf.setItens(itens);
-                notaAnterior = notaAtual;
-                System.out.println(nf.getItens().imprimirLista());
+                listaNotas.adicionar(nf);
+                itens = new ListaItemNotaFiscal();
+                nf = new NotaFiscal(colunas[0], Date.valueOf(colunas[1]), colunas[2], colunas[3], colunas[4], colunas[5], colunas[6]);
             }
+            ItemNotaFiscal item = new ItemNotaFiscal(colunas[7], colunas[8], Integer.parseInt(colunas[9]), Double.parseDouble(colunas[10]));
+            itens.adicionar(item);
+            notaAnterior = notaAtual;
             linha = br.readLine();
         }
+        nf.setItens(itens);
+        listaNotas.adicionar(nf);
     }
-
-/*    public static void lerArquivoa() throws IOException {
-        String linha;
-        String arquivo = "C:\\TEMP\\notas_fiscais_00500.csv";
-        BufferedReader leitor = new BufferedReader(new FileReader(arquivo));
-        try {
-            System.out.println(leitor.readLine()); //pula a primeira linha do cabecalho
-            linha = leitor.readLine();
-            String[] colunas = linha.split("[|]");
-            String notaAtual = colunas[0];
-            String notaAnterior = notaAtual;
-            NotaFiscal nf = new NotaFiscal();
-            nf.setNumero(colunas[0]);
-            nf.setData(Date.valueOf(colunas[1]));
-            nf.setCliente(colunas[2]);
-            ListaItemNotaFiscal items = new ListaItemNotaFiscal();
-            nf.setItens(items);
-            while ((linha = leitor.readLine()) != null) {
-                colunas = linha.split("[|]");
-                notaAtual = colunas[0];
-                if(!notaAnterior.equals(notaAtual)) {
-                    nf = new NotaFiscal();
-                    nf.setNumero(colunas[0]);
-                    nf.setData(Date.valueOf(colunas[1]));
-                    nf.setCliente(colunas[2]);
-                    items = new ListaItemNotaFiscal();
-                    nf.setItens(items);
-                    notaAnterior = notaAtual;
-                }
-                ItemNotaFiscal item = new ItemNotaFiscal(colunas[7], colunas[8], Integer.parseInt(colunas[9]), Double.parseDouble(colunas[10]));
-                items.adicionar(item);
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-        //lista.imprimirLista();
-    }
+}
 

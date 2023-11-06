@@ -43,7 +43,6 @@ public class ItemNotaFiscal {
                 ", descricao='" + descricao + '\'' +
                 ", quantidade=" + quantidade +
                 ", valorUnitario=" + valorUnitario +
-                ", proximo=" + proximo +
                 '}';
     }
 

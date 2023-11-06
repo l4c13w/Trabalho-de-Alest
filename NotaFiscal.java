@@ -77,4 +77,11 @@ public class NotaFiscal {
         return anterior;
     }
 
+    public void setProximo(NotaFiscal proximo) {
+        this.proximo = proximo;
+    }
+
+    public void setAnterior(NotaFiscal anterior) {
+        this.anterior = anterior;
+    }
 }

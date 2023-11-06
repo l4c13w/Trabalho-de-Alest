@@ -22,6 +22,29 @@ public class ListaNotaFiscal {
         quantidade++;
     }
 
+    public NotaFiscal consultar(String x) {
+        NotaFiscal encontrado = this.inicio;
+        int start = 0;
+        int meio = 0;
+        int end = quantidade;
+
+        while (start <= end) {
+            meio = (end + start) / 2;
+
+            for (int i = 0; i < meio; i++) {
+                encontrado = encontrado.proximo;
+                if (encontrado.getNumero().compareTo(x) > 0) {
+                    start = meio + 1;
+                } else if(encontrado.getNumero().compareTo(x) < 0){
+                    end = meio - 1;
+                } else{
+                    return encontrado;
+                }
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         String s = "";

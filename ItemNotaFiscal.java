@@ -16,6 +16,10 @@ public class ItemNotaFiscal {
         return quantidade * valorUnitario;
     }
 
+    public void setValorUnitario(double valorUnitario) {
+        this.valorUnitario = valorUnitario;
+    }
+
     public String getItemNumero() {
         return itemNumero;
     }

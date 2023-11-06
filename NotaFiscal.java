@@ -88,4 +88,17 @@ public class NotaFiscal {
     public void setAnterior(NotaFiscal anterior) {
         this.anterior = anterior;
     }
+
+    public void setNumero(String numero){
+        this.numero = numero;
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+        str += "Nota Fiscal: " + this.getNumero() + " Quantidade de Itens: " + this.getItens().getQuantidade() + " Valor Total: R$" + this.getValorTotal() + "\n" +
+        this.getItens();
+
+        return str;
+    }
 }

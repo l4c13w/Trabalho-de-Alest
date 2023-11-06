@@ -1,5 +1,3 @@
-package Apoio_T2;
-
 public class ListaNotaFiscal {
     private NotaFiscal inicio;
     private NotaFiscal fim;
@@ -32,7 +30,6 @@ public class ListaNotaFiscal {
             meio = (end + start) / 2;
 
             for (int i = 0; i < meio; i++) {
-                encontrado = encontrado.proximo;
                 if (encontrado.getNumero().compareTo(x) > 0) {
                     start = meio + 1;
                 } else if(encontrado.getNumero().compareTo(x) < 0){
@@ -40,10 +37,13 @@ public class ListaNotaFiscal {
                 } else{
                     return encontrado;
                 }
+                encontrado = encontrado.proximo;
             }
         }
         return null;
     }
+
+    
 
     @Override
     public String toString() {
@@ -63,9 +63,46 @@ public class ListaNotaFiscal {
     public String imprimirLista() {
         String str = "";
         for (int i = 0; i < quantidade; i++) {
-            str += inicio.getItens().imprimirLista() + "\n";
+            str += "Numero: " + inicio.getNumero() +
+            "Valor total:" + inicio.getValorTotal() + "\n\n";
             inicio = inicio.proximo;
         }
         return str;
+    }
+
+    public NotaFiscal maiorValor(){
+        NotaFiscal a = this.inicio;
+        NotaFiscal aux = a;
+        for (int i = 0; i < this.quantidade; i++) {
+            if(a.getValorTotal() < aux.getValorTotal()){
+                a = aux;
+            }
+            aux = aux.proximo;
+        }
+        return a;
+    }
+
+    public NotaFiscal menorValor(){
+        NotaFiscal a = this.inicio;
+        NotaFiscal aux = a;
+        for (int i = 0; i < this.quantidade; i++) {
+            if(a.getValorTotal() > aux.getValorTotal()){
+                a = aux;
+            }
+            aux = aux.proximo;
+        }
+        return a;
+    }
+
+    public NotaFiscal maisItens(){
+        NotaFiscal a = this.inicio;
+        NotaFiscal aux = a;
+        for (int i = 0; i < this.quantidade; i++) {
+            if(a.getItens().getQuantidade() < aux.getItens().getQuantidade()){
+                a = aux;
+            }
+            aux = aux.proximo;
+        }
+        return a;
     }
 }

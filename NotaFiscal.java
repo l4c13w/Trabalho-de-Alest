@@ -1,5 +1,3 @@
-package Apoio_T2;
-
 import java.util.Date;
 
 public class NotaFiscal {
@@ -13,6 +11,7 @@ public class NotaFiscal {
     private ListaItemNotaFiscal itens;
     public NotaFiscal proximo;
     public NotaFiscal anterior;
+    public double valorTotal;
 
     public NotaFiscal(String numero, Date data, String cliente, String cnpjCpf, String endereco, String cidade, String estado) {
         this.numero = numero;
@@ -25,6 +24,7 @@ public class NotaFiscal {
     }
 
     public void setItens(ListaItemNotaFiscal itens) {
+        valorTotal = itens.getValorTotal();
         this.itens = itens;
     }
 
@@ -75,6 +75,10 @@ public class NotaFiscal {
 
     public NotaFiscal getAnterior() {
         return anterior;
+    }
+
+    public double getValorTotal(){
+        return valorTotal;
     }
 
     public void setProximo(NotaFiscal proximo) {

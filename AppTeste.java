@@ -1,5 +1,3 @@
-package Apoio_T2;
-
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -41,21 +39,21 @@ public class AppTeste {
 
         Scanner sc = new Scanner(System.in);
         int opcao = sc.nextInt();
+        sc.nextLine();
         switch(opcao){
             case 1:
-                System.out.println("Digite o número da NF");
-                String numero = sc.next();
-                System.out.println(listaNotas.consultar(numero));
+                String find = sc.nextLine();
+                System.out.println(listaNotas.consultar(find));
                 break;
-/*            case 2:
-                System.out.println(listaNotas.maiorValor());
+            case 2:
+                System.out.println(listaNotas.maiorValor().getNumero());
                 break;
             case 3:
-                System.out.println(listaNotas.menorValor());
+                System.out.println(listaNotas.menorValor().getNumero());
                 break;
             case 4:
-                System.out.println(listaNotas.maisItens());
-                break;*/
+                System.out.println(listaNotas.maisItens().getNumero());
+                break;
             case 5:
                 System.out.println(listaNotas.imprimirLista());
                 break;
@@ -77,8 +75,8 @@ public class AppTeste {
             colunas = linha.split("[|]");
             notaAtual = colunas[0];
             if(!notaAnterior.equals(notaAtual)) {
-                nf.setItens(itens.ordena());
                 listaNotas.adicionar(nf);
+                nf.setItens(itens);
                 itens = new ListaItemNotaFiscal();
                 nf = new NotaFiscal(colunas[0], Date.valueOf(colunas[1]), colunas[2], colunas[3], colunas[4], colunas[5], colunas[6]);
             }
@@ -87,8 +85,9 @@ public class AppTeste {
             notaAnterior = notaAtual;
             linha = br.readLine();
         }
-        nf.setItens(itens.ordena());
+        nf.setItens(itens);
         listaNotas.adicionar(nf);
+        //listaNotas = listaNotas.ordena();
     }
 }
 

@@ -1,5 +1,3 @@
-package Apoio_T2;
-
 public class ItemNotaFiscal {
     private String itemNumero;
     private String descricao;

@@ -8,105 +8,45 @@ public class ListaNotaFiscal {
         this.fim = null;
         this.quantidade = 0;
     }
+    
     public void adicionar(NotaFiscal notaFiscal) {
         if(quantidade==0) {
             inicio = notaFiscal;
             fim = notaFiscal;
+            inicio.proximo = fim;
+            fim.anterior = inicio;
         }
         else {
-            fim.proximo = notaFiscal;
-            fim = notaFiscal;
+            NotaFiscal aux = inicio;
+            if(notaFiscal.getNumero().compareTo(inicio.getNumero()) < 0){
+                notaFiscal.proximo = inicio;
+                inicio.anterior = notaFiscal;
+                inicio = notaFiscal;
+            } else if(notaFiscal.getNumero().compareTo(fim.getNumero()) > 0){
+                fim.proximo = notaFiscal;
+                notaFiscal.anterior = fim;
+                fim = notaFiscal;
+            }
+            while(notaFiscal.getNumero().compareTo(aux.getNumero()) <= 0){
+                aux = aux.proximo;
+            }
+            notaFiscal.proximo = aux.proximo;
+            aux.proximo = notaFiscal;
+            notaFiscal.proximo.anterior = notaFiscal;
+            notaFiscal.anterior = aux;
         }
         quantidade++;
     }
 
-    NotaFiscal meio(NotaFiscal inicio, NotaFiscal fim){
-        if(inicio == null) return null;
-
-        NotaFiscal slow = inicio;
-        NotaFiscal fast = inicio.proximo;
-
-        while(fast != fim){
-            fast = fast.proximo;
-            if(fast != fim){
-                slow = slow.proximo;
-                fast = fast.proximo;
+    public NotaFiscal busca(String numero){
+        NotaFiscal aux = inicio;
+        for (int i = 0; i < quantidade; i++) {
+            if(aux.getNumero().equals(numero)){
+                return aux;
             }
+            aux = aux.proximo;
         }
-        return slow;
-    }
-
-    NotaFiscal busca(NotaFiscal ini, String valor){
-        NotaFiscal start = ini;
-        NotaFiscal finish = null;
-
-        do{
-            NotaFiscal meio = meio(start, finish);
-            
-            if(meio == null) return null;
-
-            if(meio.getNumero().equals(valor)){
-                return meio;
-            } else if(meio.getNumero().compareTo(valor) > 0){
-                finish = meio;
-            } else{
-                start = meio.proximo;
-            }
-        } while(finish != null || finish != start);
-
         return null;
-    }
-
-    NotaFiscal sort(NotaFiscal a, NotaFiscal b){
-        NotaFiscal resultado = null;
-
-        if(a == null) return b;
-        if(b == null) return a;
-
-        if(a.getNumero().compareTo(b.getNumero()) <= 0){
-            resultado = a;
-            resultado.proximo = sort(a.proximo, b);
-        } else{
-            resultado = b;
-            resultado.proximo = sort(a, b.proximo);
-        }
-        return resultado;
-    }
-
-    NotaFiscal merge(NotaFiscal h){
-        if(h == null || h.proximo == null) return h;
-
-        NotaFiscal meio = getMeio(h);
-        NotaFiscal meioProximo = meio.proximo;
-
-        meio.proximo = null;
-
-        NotaFiscal esquerda = merge(h);
-
-        NotaFiscal direita = merge(meioProximo);
-
-        NotaFiscal ordenada = sort(esquerda, direita);
-        return ordenada;
-    }
-
-    NotaFiscal getMeio(NotaFiscal h){
-        if(h == null) return h;
-
-        NotaFiscal fast = h.proximo;
-        NotaFiscal slow = h;
-
-        while(fast != null){
-            fast = fast.proximo;
-            if(fast != null){
-                slow = slow.proximo;
-                fast = fast.proximo;
-            }
-        }
-        return slow;
-    }
-
-    void ordenar(){
-        inicio = merge(inicio);
     }
 
     public int getQuantidade() {
@@ -122,11 +62,12 @@ public class ListaNotaFiscal {
     }
 
     public String imprimirLista() {
+        NotaFiscal aux = inicio;
         String str = "";
         for (int i = 0; i < quantidade; i++) {
-            str += "Numero: " + inicio.getNumero() +
-            " Valor total:" + inicio.getValorTotal() + "\n\n";
-            inicio = inicio.proximo;
+            str += "Numero: " + aux.getNumero() +
+            " Valor total:" + aux.getValorTotal() + "\n";
+            aux = aux.proximo;
         }
         return str;
     }
@@ -156,7 +97,6 @@ public class ListaNotaFiscal {
     }
 
     public NotaFiscal maisItens(){
-        ListaNotaFiscal comp = new ListaNotaFiscal();
         NotaFiscal a = this.inicio;
         NotaFiscal aux = a;
         for (int i = 0; i < this.quantidade; i++) {
@@ -170,13 +110,12 @@ public class ListaNotaFiscal {
 
     @Override
     public String toString() {
+        NotaFiscal aux = inicio;
         String str = "";
-
         for (int i = 0; i < this.quantidade; i++) {
-            str += this.inicio;
-            inicio = inicio.proximo;
+            str += aux;
+            aux = aux.proximo;
         }
-
         return str;
     }
 }

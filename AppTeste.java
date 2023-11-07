@@ -12,7 +12,7 @@ public class AppTeste {
     private ListaNotaFiscal listaNotas;
     public AppTeste(){
             try {
-                Path path = Paths.get("notas_fiscais_00500.csv");
+                Path path = Paths.get("notas_fiscais_00100.csv");
                 br = Files.newBufferedReader(path, Charset.forName("ISO-8859-1"));
             }
             catch (IOException e) {
@@ -47,7 +47,7 @@ public class AppTeste {
             switch(opcao){
                 case 1:
                     String find = sc.nextLine();
-                    System.out.println(listaNotas.busca(listaNotas.getInicio(), find));
+                    System.out.println(listaNotas.busca(find));
                     break;
                 case 2:
                     System.out.println(listaNotas.maiorValor());
@@ -95,6 +95,5 @@ public class AppTeste {
         }
         nf.setItens(itens);
         listaNotas.adicionar(nf);
-        listaNotas.ordenar();
     }
 }

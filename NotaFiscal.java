@@ -71,6 +71,22 @@ public class NotaFiscal {
         return valorTotal;
     }
 
+    public NotaFiscal getProximo(){
+        return this.proximo;
+    }
+
+    public NotaFiscal getAnterior(){
+        return this.anterior;
+    }
+
+    public void setProximo(NotaFiscal proximo){
+        this.proximo = proximo;
+    }
+
+    public void setAnterior(NotaFiscal anterior){
+        this.anterior = anterior;
+    }
+
     @Override
     public String toString() {
         DecimalFormat df = new DecimalFormat("R$#,###.00");

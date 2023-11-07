@@ -19,21 +19,21 @@ public class ListaNotaFiscal {
         else {
             NotaFiscal aux = inicio;
             if(notaFiscal.getNumero().compareTo(inicio.getNumero()) < 0){
-                notaFiscal.proximo = inicio;
-                inicio.anterior = notaFiscal;
+                notaFiscal.setProximo(inicio);
+                inicio.setAnterior(notaFiscal);
                 inicio = notaFiscal;
             } else if(notaFiscal.getNumero().compareTo(fim.getNumero()) > 0){
-                fim.proximo = notaFiscal;
-                notaFiscal.anterior = fim;
+                fim.setProximo(notaFiscal);
+                notaFiscal.setAnterior(fim);
                 fim = notaFiscal;
             } else{
                 while (notaFiscal.getNumero().compareTo(aux.getNumero()) >= 0) {
-                    aux = aux.proximo;
+                    aux = aux.getProximo();
                 }
-                notaFiscal.proximo = aux;
-                aux.anterior.proximo = notaFiscal;
-                notaFiscal.anterior = aux.anterior;
-                aux.anterior = notaFiscal;
+                notaFiscal.setProximo(aux);
+                aux.getAnterior().setProximo(notaFiscal);
+                notaFiscal.setAnterior(aux.getAnterior());
+                aux.setAnterior(notaFiscal);
             }
         }
         quantidade++;

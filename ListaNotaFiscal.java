@@ -4,16 +4,16 @@ public class ListaNotaFiscal {
     private int quantidade;
 
     public ListaNotaFiscal(){
-        this.inicio = null;
-        this.fim = null;
-        this.quantidade = 0;
+        inicio = null;
+        fim = null;
+        quantidade = 0;
     }
     
     public void adicionar(NotaFiscal notaFiscal) {
         if(quantidade==0) {
             inicio = notaFiscal;
-            fim = notaFiscal;
             inicio.proximo = fim;
+            fim = notaFiscal;
             fim.anterior = inicio;
         }
         else {
@@ -26,14 +26,15 @@ public class ListaNotaFiscal {
                 fim.proximo = notaFiscal;
                 notaFiscal.anterior = fim;
                 fim = notaFiscal;
+            } else{
+                while (notaFiscal.getNumero().compareTo(aux.getNumero()) >= 0) {
+                    aux = aux.proximo;
+                }
+                notaFiscal.proximo = aux;
+                aux.anterior.proximo = notaFiscal;
+                notaFiscal.anterior = aux.anterior;
+                aux.anterior = notaFiscal;
             }
-            while(notaFiscal.getNumero().compareTo(aux.getNumero()) <= 0){
-                aux = aux.proximo;
-            }
-            notaFiscal.proximo = aux.proximo;
-            aux.proximo = notaFiscal;
-            notaFiscal.proximo.anterior = notaFiscal;
-            notaFiscal.anterior = aux;
         }
         quantidade++;
     }
@@ -51,25 +52,6 @@ public class ListaNotaFiscal {
 
     public int getQuantidade() {
         return quantidade;
-    }
-
-    public NotaFiscal getInicio(){
-        return inicio;
-    }
-
-    public NotaFiscal getFim(){
-        return fim;
-    }
-
-    public String imprimirLista() {
-        NotaFiscal aux = inicio;
-        String str = "";
-        for (int i = 0; i < quantidade; i++) {
-            str += "Numero: " + aux.getNumero() +
-            " Valor total:" + aux.getValorTotal() + "\n";
-            aux = aux.proximo;
-        }
-        return str;
     }
 
     public NotaFiscal maiorValor(){
@@ -113,7 +95,7 @@ public class ListaNotaFiscal {
         NotaFiscal aux = inicio;
         String str = "";
         for (int i = 0; i < this.quantidade; i++) {
-            str += aux;
+            str += aux + "\n\n";
             aux = aux.proximo;
         }
         return str;

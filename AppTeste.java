@@ -59,7 +59,7 @@ public class AppTeste {
                     System.out.println(listaNotas.maisItens());
                     break;
                 case 5:
-                    System.out.println(listaNotas.imprimirLista());
+                    System.out.println(listaNotas);
                     break;
                 case 0:
                     System.out.println("Saindo...");

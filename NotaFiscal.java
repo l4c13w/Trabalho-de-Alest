@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.Date;
 
 public class NotaFiscal {
@@ -62,43 +63,27 @@ public class NotaFiscal {
         return estado;
     }
 
-
     public ListaItemNotaFiscal getItens() {
         return itens;
-    }
-
-
-    public NotaFiscal getProximo() {
-        return proximo;
-    }
-
-
-    public NotaFiscal getAnterior() {
-        return anterior;
     }
 
     public double getValorTotal(){
         return valorTotal;
     }
 
-    public void setProximo(NotaFiscal proximo) {
-        this.proximo = proximo;
-    }
-
-    public void setAnterior(NotaFiscal anterior) {
-        this.anterior = anterior;
-    }
-
-    public void setNumero(String numero){
-        this.numero = numero;
-    }
-
     @Override
     public String toString() {
-        String str = "";
-        str += "Nota Fiscal: " + this.getNumero() + " Quantidade de Itens: " + this.getItens().getQuantidade() + " Valor Total: R$" + this.getValorTotal() + "\n" +
-        this.getItens();
-
-        return str;
+        DecimalFormat df = new DecimalFormat("R$#,###.00");
+        return "NotaFiscal{" +
+                "Numero='" + numero + '\'' +
+                ", Data=" + data +
+                ", Cliente='" + cliente + '\'' +
+                ", CNPJ/CPF='" + cnpjCpf + '\'' + ",\n" +
+                "Endereco='" + endereco + '\'' +
+                ", Cidade='" + cidade + '\'' +
+                ", Estado='" + estado + '\'' +
+                " Valor Total=" + df.format(valorTotal) +
+                "} \n" +
+                "Itens: \n" + '{' + itens + '}';
     }
 }

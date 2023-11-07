@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 public class ItemNotaFiscal {
     private String itemNumero;
     private String descricao;
@@ -10,14 +12,6 @@ public class ItemNotaFiscal {
         this.quantidade = quantidade;
         this.valorUnitario = valorUnitario;
     }
-    public double getValorTotalItem() {
-        return quantidade * valorUnitario;
-    }
-
-    public void setValorUnitario(double valorUnitario) {
-        this.valorUnitario = valorUnitario;
-    }
-
     public String getItemNumero() {
         return itemNumero;
     }
@@ -40,12 +34,10 @@ public class ItemNotaFiscal {
 
     @Override
     public String toString() {
-        return "ItemNotaFiscal{" +
-                "itemNumero='" + itemNumero + '\'' +
+        DecimalFormat df = new DecimalFormat("R$#,###.00");
+        return "itemNumero='" + itemNumero + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", quantidade=" + quantidade +
-                ", valorUnitario=" + valorUnitario +
-                '}';
+                ", valorUnitario=" + df.format(valorUnitario);
     }
-
 }

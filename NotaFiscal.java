@@ -25,7 +25,7 @@ public class NotaFiscal {
     }
 
     public void setItens(ListaItemNotaFiscal itens) {
-        valorTotal = itens.getValorTotal();
+        this.valorTotal = itens.getValorTotal();
         this.itens = itens;
     }
 

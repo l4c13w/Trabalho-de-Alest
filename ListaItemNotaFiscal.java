@@ -26,6 +26,10 @@ public class ListaItemNotaFiscal {
         return ValorTotal;
     }
 
+    public int getQuantidade() {
+        return quantidade;
+    }
+
     @Override
     public String toString() {
         String s = "";
@@ -35,8 +39,5 @@ public class ListaItemNotaFiscal {
             aux = aux.proximo;
         }
         return s;
-    }
-    public int getQuantidade() {
-        return quantidade;
     }
 }

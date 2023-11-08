@@ -6,11 +6,11 @@ import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.Scanner;
 
-public class AppTeste {
+public class App {
     private BufferedReader br;
     private ListaItemNotaFiscal itens;
     private ListaNotaFiscal listaNotas;
-    public AppTeste(){
+    public App(){
             try {
                 Path path = Paths.get("notas_fiscais_00100.csv");
                 br = Files.newBufferedReader(path, Charset.forName("ISO-8859-1"));
@@ -30,8 +30,6 @@ public class AppTeste {
     }
 
     public void menu(){
-
-
         Scanner sc = new Scanner(System.in);
         int opcao;
         do{
@@ -68,6 +66,7 @@ public class AppTeste {
                     System.out.println("Opção inválida");
             }
         } while(opcao != 0);
+        sc.close();
     }
 
     public void lerArquivo() throws IOException{

@@ -9,6 +9,10 @@ public class ListaNotaFiscal {
         quantidade = 0;
     }
     
+    public int getQuantidade() {
+        return quantidade;
+    }
+    
     public void adicionar(NotaFiscal notaFiscal) {
         if(quantidade==0) {
             inicio = notaFiscal;
@@ -48,10 +52,6 @@ public class ListaNotaFiscal {
             aux = aux.proximo;
         }
         return null;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
     }
 
     public NotaFiscal maiorValor(){
